@@ -1,0 +1,16 @@
+.contra, a{
+    color: gray;
+}
+.ng-touched.ng-invalid:is(input,textarea),
+.ng-dirty.ng-invalid:is(input, textarea){
+    outline: 2px solid #bd0c0c;
+}
+.ng-touched.ng-invalid:is(input,select),
+.ng-dirty.ng-invalid:is(input, select){
+    outline: 2px solid #bd0c0c;
+}
+.error-msg{
+    color: #bd0c0c;
+    margin: 0;
+    font-size: small;
+}

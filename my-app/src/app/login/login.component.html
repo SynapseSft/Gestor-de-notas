@@ -1,37 +1,60 @@
-<div class="p-lg-4 row w-100">
-    <div class="d-lg-block d-none col-lg-6 p-5 text-center">
-        <div class="w-75 container">
-            <img src="../../assets/imagenes/escudo.png" class="img-fluid rounded-top" alt="">
+<app-header></app-header>
+<div class="container">
+    <div class="p-lg-4 row">
+        <div class="d-lg-block d-none col-lg-6 p-3 text-center">
+            <div class="w-75 container">
+                <img src="../../assets/imagenes/escudo.png" class="img-fluid rounded-top" alt="">
+            </div>
         </div>
-    </div>
-    <div class="col-lg-6 p-lg-5 p-2 br-3 border-5">
-        <div class="p-4 shadow-lg">
-            <h1 class="text-center">Inicio de sesión</h1>
-            <form action="">
-                <div class="mb-3">
-                <label for="" class="form-label text-center">Usuario:</label>
-                <input type="text"
-                    class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+        <div class="col-lg-6 p-lg-3 p-2 br-3">
+            <div class="p-4 shadow-lg">
+                <h1 class="text-center">Inicio de sesión</h1>
+                <div class="alert alert-danger" *ngIf="datosErroneos" role="alert">
+                    {{alert}}
                 </div>
-                <div class="mb-3">
-                <label for="" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" name="" id="" placeholder="">
+                <form [formGroup]="FormularioLogin">
+                    <div class="mb-3">
+                        <label for="" class="form-label text-center">Usuario:</label>
+                        <input type="text" class="form-control" formControlName="userControl" name="user" id="user"  aria-describedby="helpId">
+                        <div class="error-containers" *ngIf="userValidate.invalid && (userValidate.touched || userValidate.dirty)">
+                            <p class="error-msg" *ngIf="userValidate.hasError('minlength')">El campo debe tener al menos 6 numeros</p>
+                            <p class="error-msg" *ngIf="userValidate.hasError('required')">El campo es obligatorio</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" formControlName="passwordControl" name="password" id="password" >
+                        <div class="error-containers" *ngIf="passwordValidate.invalid && (passwordValidate.touched || passwordValidate.dirty)">
+                            <p class="error-msg" *ngIf="passwordValidate.hasError('minlength')">El campo debe tener al menos 6 numeros</p>
+                            <p class="error-msg" *ngIf="passwordValidate.hasError('required')">El campo es obligatorio</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Tipo</label>
+                        <select class="form-select form-select-sm"  formControlName="typeControl">
+                            <option value="" disabled>Seleccione</option>
+                            <option value="Estudiante">Estudiante</option>
+                            <option value="Profesor">Profesor</option>
+                            <option value="Coordinador">Coordinador</option>
+                            <option value="Secretaria">Secretaria</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                        <div class="error-containers" *ngIf="typeValidate.invalid && (typeValidate.touched || typeValidate.dirty)">
+                            <p class="error-msg" *ngIf="typeValidate.hasError('required')">Por favor seleccione un tipo de usuario</p>
+                        </div>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button (click)="iniciar()" [disabled]="FormularioLogin.invalid" type="submit" class="btn btn-secondary me-2 ms-2">Ingresar</button>
+                    </div>
+                </form>
+                <div class="text-center fs-6 contra" >
+                    <a href="http://">Olvidé mi Contraseña</a>
                 </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Tipo</label>
-                    <select class="form-select form-select-sm" name="" id="">
-                        <option value="">Estudiante</option>
-                        <option value="">Profesor</option>
-                        <option value="">Coordinador</option>
-                        <option value="">Secretaria</option>
-                        <option value="">Administrador</option>
-                    </select>
-                </div>
-                <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-secondary me-2 ms-2">Ingresar</button>
-                </div>
-            </form>
+            </div>
+            <!-- <pre>{{FormularioLogin.value | json}}</pre> -->
+            
         </div>
-        
     </div>
 </div>
+<app-footer></app-footer>
